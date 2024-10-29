@@ -114,16 +114,17 @@ def show_numbers():
     print(" \033[1;32m3 -\033[0m uninstall tor")
     print("-----------------")
     print(" \033[1;32m4 -\033[0m get tor IP")
+    print(" \033[1;32m5 -\033[0m cronjob(set time for change your tor IP)")
     print("-----------------")
-    print(" \033[1;32m5 -\033[0m change tor IP")
-    print(" \033[1;32m6 -\033[0m change tor Port")
-    print(" \033[1;32m7 -\033[0m change tor Countries")
+    print(" \033[1;32m6 -\033[0m change tor IP")
+    print(" \033[1;32m7 -\033[0m change tor Port")
+    print(" \033[1;32m8 -\033[0m change tor Countries")
     print("-----------------")
-    print(" \033[1;32m8 -\033[0m start tor")
-    print(" \033[1;32m9 -\033[0m stop tor")
-    print(" \033[1;32m10-\033[0m restart tor")
-    print(" \033[1;32m11-\033[0m reload tor")
-    print(" \033[1;32m12-\033[0m status tor")
+    print(" \033[1;32m9 -\033[0m start tor")
+    print(" \033[1;32m10 -\033[0m stop tor")
+    print(" \033[1;32m11-\033[0m restart tor")
+    print(" \033[1;32m12-\033[0m reload tor")
+    print(" \033[1;32m13-\033[0m status tor")
     print("-----------------\n")
 
 def check_tor():
@@ -264,6 +265,81 @@ def status_tor():
         print("\033[31mTor is not installed.\033[0m\nPlease install it first.")
 
 
+def create_cron_job():
+    while True:
+        clear_screen()
+        sinasims()
+        print("Select an option for change your IP on tor:\n")
+        print("\033[1;32m0\033[0m - Exit\n")
+        print("\033[1;32m1\033[0m - 1 minute")
+        print("\033[1;32m2\033[0m - 30 minutes")
+        print("\033[1;32m3\033[0m - 1 hour")
+        print("\033[1;32m4\033[0m - 4 hours")
+        print("\033[1;32m5\033[0m - 12 hours")
+        print("\033[1;32m6\033[0m - 24 hours\n")
+
+        option = input("Select your option [0-6]: ")
+
+        # تنظیم زمان‌بندی بر اساس انتخاب کاربر
+        delay_map = {
+            '1': 1,
+            '2': 30,
+            '3': 60,
+            '4': 240,
+            '5': 720,
+            '6': 1440
+        }
+
+        if option == '0':
+            print("Exiting...")
+            return  # خروج از تابع
+
+        elif option in delay_map:
+            delay_minutes = delay_map[option]
+            print(f"Cron job set for every {delay_map[option]} minutes.")
+            break  # خروج از حلقه while
+        
+        else:
+            print("Invalid option selected.")
+            input("Press Enter to continue...")
+
+    # دستوراتی که می‌خواهیم زمان‌بندی کنیم
+    commands = [
+        "service tor reload",
+        "systemctl restart tor"
+    ]
+    
+    # مسیر جدید: پوشه خانگی کاربر روت
+    script_path = "/usr/bin/restart_tor.sh"
+    
+    # ایجاد فایل شل برای اجرای دستورات
+    with open(script_path, 'w') as script_file:
+        script_file.write("#!/bin/bash\n")
+        for command in commands:
+            script_file.write(f"{command}\n")
+    
+    # قابل اجرا کردن فایل شل
+    subprocess.run(["chmod", "+x", script_path])
+
+    # زمان‌بندی cron job
+    cron_time = f"*/{delay_minutes} * * * *"
+    cron_job = f"{cron_time} {script_path}\n"
+
+    # دریافت crontab فعلی و حذف خطوط مربوط به اسکریپت قبلی
+    result = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
+    current_crontab = result.stdout
+    new_crontab = []
+    for line in current_crontab.splitlines():
+        if script_path not in line:
+            new_crontab.append(line)
+
+    # اضافه کردن cron job جدید
+    new_crontab.append(cron_job)
+    with open("temp_cron", "w") as temp_cron_file:
+        temp_cron_file.write("\n".join(new_crontab) + "\n")
+
+    subprocess.run(['crontab', 'temp_cron'])
+    subprocess.run(['rm', 'temp_cron'])
 
 
 def get_tor_ip(port=None):
@@ -350,6 +426,9 @@ def main():
         choise = input("Select your option number [1-14]:")
         # Check input number
         match choise:
+            case "0":
+                clear_screen()
+                break
             case "1":
                 install_tor()
 
@@ -363,12 +442,14 @@ def main():
                 print(f"Server IP: {node_ip}")
                 input("press Enter to continue")
             case "5":
+                create_cron_job()
+            case "6":
                 reload_tor()
                 restart_tor()
                 print("Your Tor ip has been changed.")
                 input("Press Enter to continue...")
             
-            case "6":
+            case "7":
                 port = input("Enter Your Tor Port: ")
                 check = False
                 while True:
@@ -384,7 +465,7 @@ def main():
                 reload_tor()
                 restart_tor()
                 input("Your port has been change\nPress Enter to continue....")
-            case "7":
+            case "8":
                 print("You can use these Countries:")
                 for code, country in valid_country_codes.items():
                     print(f"{country} -> \033[0;32m{code}\033[0m")
@@ -395,19 +476,19 @@ def main():
                 restart_tor()
                 input(f"Countries of tor has been updated with: {country_data}\nPress Enter to continue....")
 
-            case "8":
+            case "9":
                 start_tor()
                 input("Tor has been started\nPress Enter to continue...")
-            case "9":
+            case "10":
                 stop_tor()
                 input("Tor has been stoped\nPress Enter to continue...")
-            case "10":
+            case "11":
                 restart_tor()
                 input("Tor has been restarted\nPress Enter to continue...")
-            case "11":
+            case "12":
                 reload_tor()
                 input("Tor has been reloaded\nPress Enter to continue...")
-            case "12":
+            case "13":
                 status_tor()
                 input("\nPress Enter to continue...")
             case _:
