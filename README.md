@@ -1,4 +1,5 @@
-# torsina
+# torsina TOR vpn management
+
 Setup tor VPN with many options
 <div class="snippet-clipboard-content notranslate position-relative overflow-auto"><pre class="notranslate"><code>bash <(curl -Ls https://raw.githubusercontent.com/sinasims/torsina/refs/heads/main/install.sh)
 </code></pre><div class="zeroclipboard-container">
