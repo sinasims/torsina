@@ -121,7 +121,7 @@ def show_numbers():
     print(" \033[1;32m8 -\033[0m change tor Countries")
     print("-----------------")
     print(" \033[1;32m9 -\033[0m start tor")
-    print(" \033[1;32m10 -\033[0m stop tor")
+    print(" \033[1;32m10-\033[0m stop tor")
     print(" \033[1;32m11-\033[0m restart tor")
     print(" \033[1;32m12-\033[0m reload tor")
     print(" \033[1;32m13-\033[0m status tor")
