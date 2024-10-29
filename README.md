@@ -11,7 +11,7 @@
 
 
 
-## Install & Upgrade
+## Install
 
 ```
 bash <(curl -Ls https://raw.githubusercontent.com/sinasims/torsina/refs/heads/main/install.sh)
