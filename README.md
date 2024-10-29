@@ -21,7 +21,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/sinasims/torsina/refs/heads/ma
 
 ## Tutorial
 
-<p align="center"><a href="#"><img src="images/torsina.png" alt="Sinasims" height=600></a></p>
+<p align="center"><a href="#"><img src="images/torsina.png" alt="Sinasims" height=100%></a></p>
 
 **1 -** **With this option, you can install tor.** (you have to first install tor)
 
