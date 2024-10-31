@@ -27,22 +27,16 @@ def clear_screen():
     os.system("clear")
 
 def sinasims():
-    print('''\033[1;32m
+    print('''\033[1;36m
                                                                     
-    .--.--.                                           .--.--.                        ____                
-    /  /    '.    ,--,                                /  /    '.    ,--,            ,'  , `.              
-    |  :  /`. /  ,--.'|          ,---,                |  :  /`. /  ,--.'|         ,-+-,.' _ |              
-    ;  |  |--`   |  |,       ,-+-. /  |               ;  |  |--`   |  |,       ,-+-. ;   , ||   .--.--.    
-    |  :  ;_     `--'_      ,--.'|'   |    ,--.--.    |  :  ;_     `--'_      ,--.'|'   |  ||  /  /    '   
-    \  \    `.  ,' ,'|    |   |  ,"' |   /       \    \  \    `.  ,' ,'|    |   |  ,', |  |, |  :  /`./   
-    `----.   \ '  | |    |   | /  | |  .--.  .-. |    `----.   \ '  | |    |   | /  | |--'  |  :  ;_     
-    __ \  \  | |  | :    |   | |  | |   \__\/: . .    __ \  \  | |  | :    |   : |  | ,      \  \    `.  
-    /  /`--'  / '  : |__  |   | |  |/    ," .--.; |   /  /`--'  / '  : |__  |   : |  |/        `----.   \ 
-    '--'.     /  |  | '.'| |   | |--'    /  /  ,.  |  '--'.     /  |  | '.'| |   | |`-'        /  /`--'  / 
-    `--'---'   ;  :    ; |   |/       ;  :   .'   \   `--'---'   ;  :    ; |   ;/           '--'.     /  
-                |  ,   /  '---'        |  ,     .-./              |  ,   /  '---'              `--'---'   
-                ---`-'                 `--`---'                   ---`-'                                 
-                   
+  _________.__                     .__                
+ /   _____/|__| ____ _____    _____|__| _____   ______
+ \_____  \ |  |/    \\__  \  /  ___/  |/     \ /  ___/
+ /        \|  |   |  \/ __ \_\___ \|  |  Y Y  \\___ \ 
+/_______  /|__|___|  (____  /____  >__|__|_|  /____  >
+        \/         \/     \/     \/         \/     \/ 
+                                                      
+          
     \033[0m''')
 
 def install_tor():
@@ -102,16 +96,42 @@ def update_tor():
         print(f"An error occurred: {e}")
 
 def show_numbers():
+    tor_status = check_tor()
+    if(tor_status):
+        tor = True
+    else:
+        tor = False
     print(" \033[1;32mSinasims tor management:\033[0m\n")
-    print(" \033[1;32m0 -\033[0m exit")
-    print("-----------------")
+    print(" \033[0;32mversion: \033[0;33mv1.0\033[0m")
+    print(" \033[0;32mgithub: \033[0;33mgithub.com/sinasims/torsina")
+    print(" \033[0;32mTelegram ID: \033[0;33mt.me/sinasimss")
+    print("\033[0;33m═════════════════════════════════════════════\033[0m")
+    if tor:
+        print(" \033[0;36mTor: \033[0;32mInstalled")
+    else:
+        print(" \033[0;36mTor: \033[0;31mNot installed")
+
+    
+    socks_port, countries = read_torrc(torrc_path)
+    if(socks_port == None):
+        socks_port = 9050
+    print(f" \033[0;36mYour Tor Server: \033[0;33m127.0.0.1:{socks_port}\033[0m")
+    print(f" \033[0;36mYour Tor Countries: \033[0;33m{countries}\033[0m")
+    if get_server_location() != None:
+        country, ip = get_server_location()
+        print(f" \033[0;36mServer Location: \033[0m{country}")
+        print(f" \033[0;36mServer IP: \033[0m{ip}")
+
+    print("\033[0;33m═════════════════════════════════════════════\033[0m\n")
+
+    
     tor_status = check_tor()
     if(tor_status):
         print(" \033[1;32m1 -\033[0m install tor (" + "\033[1;32minstalled\033[0m)")
     else:
         print(" \033[1;32m1 -\033[0m install tor (" + "\033[1;31mnot installed\033[0m)")
     print(" \033[1;32m2 -\033[0m update tor")
-    print(" \033[1;32m3 -\033[0m uninstall tor")
+    print(" \033[1;32m3 -\033[0;31m uninstall tor\033[0m")
     print("-----------------")
     print(" \033[1;32m4 -\033[0m get tor IP")
     print(" \033[1;32m5 -\033[0m cronjob(set time for change your tor IP)")
@@ -125,7 +145,8 @@ def show_numbers():
     print(" \033[1;32m11-\033[0m restart tor")
     print(" \033[1;32m12-\033[0m reload tor")
     print(" \033[1;32m13-\033[0m status tor")
-    print("-----------------\n")
+    print("-----------------")
+    print(" \033[1;32m0 -\033[0m exit\n\n")
 
 def check_tor():
     try:
@@ -392,6 +413,18 @@ def update_tor_country():
         print(f"ExitNodes has been updated successfully with {output_string}")
 
 
+def get_server_location():
+    try:
+        import requests
+        response = requests.get('https://ipinfo.io')
+        response.raise_for_status()
+        data = response.json()
+        country = data.get('country', 'Country not found')
+        ip = data.get('ip', 'ip not found')
+        return country, ip
+        
+    except requests.exceptions.RequestException as e:
+        return None
 
 
 
@@ -411,17 +444,7 @@ def main():
         clear_screen()
         sinasims()
         show_numbers()
-        socks_port, countries = read_torrc(torrc_path)
-        if(socks_port == None):
-            socks_port = 9050
-        # Check tor is installed?
-        # tor_status = check_tor()
-        # if(tor_status):
-        #     print("Tor is \033[1;32minstalled\033[0m")
-        # else:
-        #     print("Tor is \033[1;31mnot installed\033[0m")
-        print(f"Your Server: \033[0;33m127.0.0.1:{socks_port}\033[0m")
-        print(f"Your Countries: \033[0;33m{countries}\033[0m\n")
+        
         # Get Input Number
         choise = input("Select your option number [1-14]:")
         # Check input number
