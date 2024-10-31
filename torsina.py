@@ -446,7 +446,7 @@ def main():
         show_numbers()
         
         # Get Input Number
-        choise = input("Select your option number [1-14]:")
+        choise = input("Enter Your Choice [1-13]:")
         # Check input number
         match choise:
             case "0":
