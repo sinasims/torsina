@@ -3,48 +3,46 @@
 <p align="center"><a href="#"><img src="images/logo.png" alt="Sinasims" height=300></a></p>
 
 
-# What is TorSina?
-**A program for managing Tor, written in Python.**
+# تورسینا چیست؟
+**یه برنامه برای مدیریت تور است که با پایتون نوشته شده است.**
 
-**If this project is helpful to you, you may wish to give it a**🌟
+اگر این برنامه براتون مفید بود یه ستاره من و مهمون کن🌟
 
-**If you like this program, I will add more options to it.**
+اگر استقبال خوبی شد، حتما گزینه های جدید رو بهش اضافه میکنم!
 
 
 
-## How to Run?
-**Run the following script on your server (Debian or Ubuntu):**
+## مراحل نصب
+کد زیر رو کپی و در سرور خودتون اجرا کنید
 ```
 bash <(curl -Ls https://raw.githubusercontent.com/sinasims/torsina/refs/heads/main/install.sh)
 ```
 
-## Menu (v1)
+## منو برنامه (ورژن ۱)
 
 <p align="center"><a href="#"><img src="images/torsina.png" alt="Sinasims" width=100%></a></p>
 
-**1 -** **With this option, you can install tor.** (you have to first install tor)
 
-**2 -** **With this option, you can update tor.**
+## نحوه کانفیگ برنامه
 
-**3 -** **With this option, you can uninstall tor.**
+<ul>
+<li>بعد از اجرای اسکریپت گزینه ۱ رو انتخاب کنید تا پکیج های مورد نیاز نصب شه </li>
+<li>برای اینکه پورت تور رو تغییر بدید گزینه ۷ رو انتخاب کرده و بعد پورت مورد نظر رو وارد کنید.</li>
+<li>برای اینکه فقط به کشوری خاص وصل بشید میتونید گزینه ۸ رو انتخاب کنید و کشور مورد نظر رو وارد کنید(مثلا برای اتصال به کشورهای ترکیه و ژاپن مقدار tr, jp رو باید وارد کنید)</li>
+<li>برای اینکه آیپی شما بعد زمان انتخاب شده شما تغییر کنه گزینه ۵ رو انتخاب و بعد مدت زمان خود رو انتخاب کنید</li>
+<li>برای تغییر آیپی در همان لحظه از گزینه ۶ استفاده کنید</li>
+<li>برای دیدن آیپی خود از گزینه ۴ استفاده کنید</li>
+<li>گزینه های دیگر هم مشخصه</li>
+</ul>
 
-**4 -** **With this option, you can check your server's IP.**
+## آیدی تلگرام
+اگه سوالی داشتید میتونید از طریق تلگرام با من در تماس باشید
+[sinasimss](https://t.me/sinasimss) 
 
-**5 -** **With this option, you can create a cron job that changes your server's IP based on the time you select.**
+## حمایت از پروژه
+Donate TRX (TRC-20) to support our project:
 
-**6 -** **With this option, you can change your server's IP.**
-
-**7 -** **With this option, you can change your Tor port.**
-
-**8 -** **With this option, you can use your selected countries for Tor.**
-
-**9 -** **With this option, you can start Tor.**
-
-**10-** **With this option, you can stop Tor.**
-
-**11-** **With this option, you can restart Tor.**
-
-**12-** **With this option, you can reload Tor.**
-
-**13-** **With this option, you can see status of Tor.**
-
+```
+TUyrabtvZY2GekmK7gyJzSML4gfktAvz68
+```
+ممنون از حمایتتون
