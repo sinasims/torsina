@@ -22,29 +22,17 @@ bash <(curl -Ls https://raw.githubusercontent.com/sinasims/torsina/refs/heads/ma
 
 <p align="center"><a href="#"><img src="images/torsina.png" alt="Sinasims" width=100%></a></p>
 
-**1 -** **With this option, you can install tor.** (you have to first install tor)
+## My Telegram ID
 
-**2 -** **With this option, you can update tor.**
+If you have any questions, feel free to ask me.
 
-**3 -** **With this option, you can uninstall tor.**
+[sinasimss](https://t.me/sinasimss) 
 
-**4 -** **With this option, you can check your server's IP.**
+## Donation Link
 
-**5 -** **With this option, you can create a cron job that changes your server's IP based on the time you select.**
+Donate TRX (TRC-20) to support our project:
 
-**6 -** **With this option, you can change your server's IP.**
-
-**7 -** **With this option, you can change your Tor port.**
-
-**8 -** **With this option, you can use your selected countries for Tor.**
-
-**9 -** **With this option, you can start Tor.**
-
-**10-** **With this option, you can stop Tor.**
-
-**11-** **With this option, you can restart Tor.**
-
-**12-** **With this option, you can reload Tor.**
-
-**13-** **With this option, you can see status of Tor.**
-
+```
+TUyrabtvZY2GekmK7gyJzSML4gfktAvz68
+```
+Thanks for your support!
