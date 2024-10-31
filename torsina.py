@@ -117,16 +117,15 @@ def show_numbers():
         socks_port = 9050
     print(f" \033[0;36mYour Tor Server: \033[0;33m127.0.0.1:{socks_port}\033[0m")
     print(f" \033[0;36mYour Tor Countries: \033[0;33m{countries}\033[0m")
-    if get_server_location() != None:
-        country, ip = get_server_location()
-        print(f" \033[0;36mServer Location: \033[0m{country}")
-        print(f" \033[0;36mServer IP: \033[0m{ip}")
+    # if get_server_location() != None:
+    #     country, ip = get_server_location()
+    #     print(f" \033[0;36mServer Location: \033[0m{country}")
+    #     print(f" \033[0;36mServer IP: \033[0m{ip}")
 
     print("\033[0;33m═════════════════════════════════════════════\033[0m\n")
 
     
-    tor_status = check_tor()
-    if(tor_status):
+    if tor:
         print(" \033[1;32m1 -\033[0m install tor (" + "\033[1;32minstalled\033[0m)")
     else:
         print(" \033[1;32m1 -\033[0m install tor (" + "\033[1;31mnot installed\033[0m)")
@@ -462,7 +461,7 @@ def main():
                 uninstall_tor()
             case "4":
                 node_ip = get_tor_ip()
-                print(f"Server IP: {node_ip}")
+                print(f"Tor Server IP: {node_ip}")
                 input("press Enter to continue")
             case "5":
                 create_cron_job()
