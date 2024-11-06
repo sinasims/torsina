@@ -31,7 +31,8 @@ If you have any questions, feel free to ask me.
 ## Donation Link
 
 Donate TRX (TRC-20) to support our project:
-<a href="https://nowpayments.io/donation?api_key=5E3Y26C-TSZMQQZ-KZVPEH6-2H6FXYS" target="_blank" rel="noreferrer noopener">
+
+<a href="https://nowpayments.io/donation?api_key=5E3Y26C-TSZMQQZ-KZVPEH6-2H6FXYS" target="_blank" rel="noreferrer noopener" style="text-align:left;">
     <img src="https://nowpayments.io/images/embeds/donation-button-white.svg" alt="Cryptocurrency & Bitcoin donation button by NOWPayments">
 </a>
 
